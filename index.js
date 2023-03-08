@@ -91,11 +91,9 @@ app.get("/courses", (req, res) => {
 app.put("/students/:id", (req, res) => {
   const id1 = parseInt(req.params.id);
   const { name, id } = req.body;
-  const index = students.findIndex((s) => s.id === id1);
-  if (index >= 1) {
-    students[index].name = name;
-    students[index].id = id;
-    res.json(students[index]);
+  const result = students.filter((s) => s.id === id1);
+  if (index >= 0) {
+    res.json(students[result]);
   } else {
     res.status(404).json({ message: `Student with ID ${id1} not found` });
   }
