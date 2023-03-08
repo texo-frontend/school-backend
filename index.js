@@ -90,10 +90,9 @@ app.get("/courses", (req, res) => {
 //-> refetch students
 app.put("/students/:id", (req, res) => {
   const id1 = parseInt(req.params.id);
-  const { name, id } = req.body;
   const result = students.filter((s) => s.id === id1);
   if (index >= 0) {
-    res.json(students[result]);
+    res.json(result);
   } else {
     res.status(404).json({ message: `Student with ID ${id1} not found` });
   }
