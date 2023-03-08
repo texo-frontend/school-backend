@@ -76,10 +76,11 @@ const courses = [
 
 //1. get all students
 // -> fetch students
-app.get("/students", (req, res) => {
-  res.json(students);
-});
+students.map(getAllStudents);
 
+function getAllStudents(students) {
+  return [students.name, students.id];
+}
 //*** 2. get all courses
 //-> fetch courses
 app.get("/courses", (req, res) => {
