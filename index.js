@@ -76,6 +76,9 @@ const courses = [
 
 //1. get all students
 // -> fetch students
+app.get("/students", (req, res) => {
+  res.json(students);
+});
 
 //*** 2. get all courses
 //-> fetch courses
