@@ -77,8 +77,11 @@ const courses = [
 //1. get all students
 // -> fetch students
 
-//2. get all courses
+//*** 2. get all courses
 //-> fetch courses
+app.get("/courses", (req, res) => {
+  res.json(courses);
+});
 
 //3. create new student (form with existing courses with checkbox)
 //-> refetch students
