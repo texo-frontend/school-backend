@@ -76,11 +76,10 @@ const courses = [
 
 //1. get all students
 // -> fetch students
-students.map(getAllStudents);
+app.get("/students", (req, res) => {
+  res.json(students);
+});
 
-function getAllStudents(students) {
-  return [students.name, students.id];
-}
 //get students by ID
 app.get("/students/:id", (req, res) => {
   const studentId = parseInt(req.params.id);
