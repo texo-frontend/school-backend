@@ -50,7 +50,7 @@ const courses = [
     ],
   },
   {
-    id: 1,
+    id: 2,
     name: "socialMedia",
     students: [
       {
@@ -64,7 +64,7 @@ const courses = [
     ],
   },
   {
-    id: 1,
+    id: 3,
     name: "graphicDesign",
     students: [
       { id: 3, grades: [4, 4] },
@@ -87,6 +87,17 @@ app.get("/courses", (req, res) => {
   res.json(courses);
 });
 
+//get course by ID
+
+app.get("/courses/:id", (req, res) => {
+  const courseId = parseInt(req.params.id);
+  const course = courses.filter((course) => course.id === courseId)[0];
+  if (course) {
+    res.json(course);
+  } else {
+    res.status(404).json("Course not found");
+  }
+});
 //3. create new student (form with existing courses with checkbox)
 //-> refetch students
 //4. create new course (form with existing students with checkbox)
