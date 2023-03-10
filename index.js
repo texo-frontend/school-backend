@@ -81,6 +81,16 @@ students.map(getAllStudents);
 function getAllStudents(students) {
   return [students.name, students.id];
 }
+//get students by ID
+app.get("/students/:id", (req, res) => {
+  const studentsId = parseInt(req.params.id);
+  const result = result.filter((s) => s.id === studentsId);
+  if (result) {
+    res.json(result);
+  } else {
+    res.status(404).json("Student not found");
+  }
+});
 //*** 2. get all courses
 //-> fetch courses
 app.get("/courses", (req, res) => {
