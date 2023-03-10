@@ -80,6 +80,16 @@ app.get("/students", (req, res) => {
   res.json(students);
 });
 
+//get students by ID
+app.get("/students/:id", (req, res) => {
+  const studentId = parseInt(req.params.id);
+  const result = result.filter((s) => s.id === studentId);
+  if (result[0]) {
+    res.json(result[0]);
+  } else {
+    res.status(404).json("Student not found");
+  }
+});
 //*** 2. get all courses
 //-> fetch courses
 app.get("/courses", (req, res) => {
