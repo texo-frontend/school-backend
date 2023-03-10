@@ -83,9 +83,9 @@ function getAllStudents(students) {
 }
 //get students by ID
 app.get("/students/:id", (req, res) => {
-  const studentsId = parseInt(req.params.id);
-  const result = result.filter((s) => s.id === studentsId);
-  if (result) {
+  const studentId = parseInt(req.params.id);
+  const result = result.filter((s) => s.id === studentId);
+  if (result[0]) {
     res.json(result);
   } else {
     res.status(404).json("Student not found");
