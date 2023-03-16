@@ -2,11 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-const { request } = require("express");
 
 const app = express();
 app.use(cors());
-app.use(express.json());
 const port = 3000;
 
 const students = [
@@ -52,7 +50,7 @@ const courses = [
     ],
   },
   {
-    id: 2,
+    id: 1,
     name: "socialMedia",
     students: [
       {
@@ -66,7 +64,7 @@ const courses = [
     ],
   },
   {
-    id: 3,
+    id: 1,
     name: "graphicDesign",
     students: [
       { id: 3, grades: [4, 4] },
@@ -74,8 +72,6 @@ const courses = [
       { id: 2, grades: [6, 6, 6] },
     ],
   },
-
-  
 ];
 
 //1. get all students
@@ -128,88 +124,6 @@ app.get("/courses/:id", (req, res) => {
 //8. give grade to student course
 //9. get average of grades in student per course
 
-function findCourse(id){
-  for(let i = 0; i< courses.length; i++){
-   if(courses[i].id == id){
-     return courses[i];
-   } 
-  }
-}
-
-function findStudentByID(id){
-  return students[id-1].name;
-}
-function findCourseNameByID(id){
-  return courses[id-1].name;
-}
-
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
-});
-
-app.get("/courses",(req,res)=>{
-  res.json(courses);
-})
-
-app.get("/students",(req,res)=>{
-  res.json(students);
-})
-app.post("/students",(req,res)=>{
-  console.log(req.body.id);
-  const foundStudent = students.find((element)=>{
-    if(element.id == req.body.id){
-      return element
-    }
-  })
-  res.json(foundStudent);
-})
-
-app.post("/courses",(req,res)=>{
-  //console.log(req.body.id);
-  const foundCourse = courses.find((element)=>{
-    if(element.id == req.body.id){
-      return element
-    }
-  })
-  res.json(foundCourse);
-})
-
-app.post("/courseWithStudentsByID",(req,res)=>{
-  const foundCourse = findCourse(req.body.id);
-  const courseStudents = foundCourse.students.map((element)=>{
-    const obj = {
-      id:element.id,
-      name:findStudentByID(element.id),
-      grades:element.grades
-    }
-    return obj;
-  })
-  console.log(courseStudents)
-  const courseObj = {
-    id: req.body.id,
-    name: findCourseNameByID(req.body.id),
-    students:courseStudents
-  }
-  res.json(courseObj);
-})
-
-app.post("/addNewCourse", (req, res) => {
-  const studentsToAdd = req.body.students.map((element)=>{
-    const student = {
-      id: element,
-      grades:[]
-    }
-    return student;
-    })
-
-  const course =   {
-    id: courses.length + 1,
-    name: req.body.courseName,
-    students: studentsToAdd,
-  }
-  //console.log(course);
-  
-  courses.push(course);
-  console.log(courses)
-  res.json(course);
 });
