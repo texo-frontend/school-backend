@@ -80,10 +80,37 @@ const courses = [
 
 //1. get all students
 // -> fetch students
+app.get("/students", (req, res) => {
+  res.json(students);
+});
 
-//2. get all courses
+//get students by ID
+app.get("/students/:id", (req, res) => {
+  const studentId = parseInt(req.params.id);
+  const result = result.filter((s) => s.id === studentId);
+  if (result[0]) {
+    res.json(result[0]);
+  } else {
+    res.status(404).json("Student not found");
+  }
+});
+//*** 2. get all courses
 //-> fetch courses
+app.get("/courses", (req, res) => {
+  res.json(courses);
+});
 
+//get course by ID
+
+app.get("/courses/:id", (req, res) => {
+  const courseId = parseInt(req.params.id);
+  const course = courses.filter((course) => course.id === courseId)[0];
+  if (course) {
+    res.json(course);
+  } else {
+    res.status(404).json("Course not found");
+  }
+});
 //3. create new student (form with existing courses with checkbox)
 //-> refetch students
 //4. create new course (form with existing students with checkbox)
